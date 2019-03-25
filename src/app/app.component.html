@@ -1,20 +1,96 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Poppins:800" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<div class="row">
+    <div class="col-6">
+      <h2>Notícias recentes</h2>
+      <p>Clique no título para ler a notícia</p>
+      <div>
+       <ul>
+        <li *ngFor="let noticia of noticias">
+          <p (click)="mostrar(noticia)">{{ noticia.titulo }}</p>
+          <p *ngIf="noticia.visivel">
+           {{ noticia.descricao }}
+           <br> 
+           Data de Publicação: {{ noticia.date }}
+           <br>
+           Publicada: {{ noticia.checkbox }}
+           <br>
+           Categoria(s): {{ noticia.categoria }}
+           <br>
+           <button class="btn btn-secondary" (click)="fechar(noticia)">Fechar</button>
+           <button class="btn btn-warning" (click)="editar(noticia)">Editar</button>
+           <button class="btn btn-danger" (click)="excluir(noticia)">Excluir</button>
+          </p>
+         </li>   
+       </ul>
+      </div>
+    </div>
+    <div class="col-6">
+      <form #cadastro="ngForm" (submit)="cadastrar()">
+        <div>
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required>
+        </div>
+      
+        <div>
+          <label for="descricao">Descrição</label>
+          <textarea type="text" id="descricao" name="descricao" [(ngModel)]="descricao" required></textarea>
+        </div>
+      
+        <div>
+          <label for="date">Data de Publicação</label>
+          <input type="date" id="date" name="date" [(ngModel)]="date" required>
+        </div>
+      
+        <div>
+          <label for="checkbox">Publicada</label>
+          <input type="checkbox" id="checkbox" name="checkbox" [(ngModel)]="checkbox">
+        </div>
+      
+        <div>
+          <select name="categoria" ngModel>
+            <option value="" disabled>Selecione uma categoria</option>
+            <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+              {{ categoria }}
+            </option>
+          </select>  
+        </div>
+      
+        <!-- <div>
+          <label>
+            <input type="radio" id="radio" name="radio" [(ngModel)]="radio" required>
+            Política
+          </label><br/>
+      
+          <label>
+            <input type="radio" id="radio" name="radio" [(ngModel)]="radio" required>
+            Economia
+          </label><br/>
+      
+          <label>
+            <input type="radio" id="radio" name="radio" [(ngModel)]="radio" required>
+            Esporte
+          </label><br/>
+      
+          <label>
+            <input type="radio" id="radio" name="radio" [(ngModel)]="radio" required>
+            Etretenimento
+          </label><br/>
+        </div> -->
+        
+        <button class="btn btn-success" type="submit" [disabled]="!cadastro.form.valid">Cadastrar</button>
+        <button class="btn btn-info" type="reset" formnovalidate>Limpar</button>
+      </form>
+    </div>
+
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+
+
+
+
+
+
 
